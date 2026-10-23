@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YX Diamonds – Free Fire</title>
+<style>
+  :root { --bg:#090d18; --panel:#141b2d; --accent:#ffb300; --accent2:#ff4d6d; --text:#f5f7ff; --muted:#aab3c8; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:Arial,Helvetica,sans-serif; color:var(--text); background:radial-gradient(circle at top,#1a2850 0,#090d18 52%); }
+  header { padding:28px 16px 22px; text-align:center; background:linear-gradient(135deg,#161e36,#25214a); border-bottom:1px solid #303a5a; }
+  .logo { font-size:clamp(27px,6vw,42px); font-weight:900; letter-spacing:1px; }
+  .logo span { color:var(--accent); }
+  header p { margin:9px 0 0; color:var(--muted); }
+  main { width:min(960px,92%); margin:24px auto 40px; }
+  .notice { padding:13px 15px; border:1px solid #65501e; border-radius:12px; background:#2b2415; color:#ffe4a0; font-size:14px; line-height:1.5; }
+  h2 { margin:26px 0 13px; font-size:21px; }
+  .plans { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .plan { background:linear-gradient(160deg,#1a2339,#111727); border:1px solid #303b59; border-radius:16px; padding:19px; text-align:center; box-shadow:0 8px 24px #0003; }
+  .diamond { font-size:27px; font-weight:900; color:#79d9ff; }
+  .bonus { color:#aab3c8; font-size:13px; margin:7px 0 13px; }
+  .price { font-size:24px; font-weight:800; color:var(--accent); }
+  .plan button, .submit { border:0; border-radius:10px; padding:12px 15px; font-weight:800; cursor:pointer; color:#17120a; background:linear-gradient(90deg,#ffd166,#ffad00); width:100%; margin-top:13px; }
+  form { background:var(--panel); border:1px solid #303b59; border-radius:16px; padding:20px; }
+  label { display:block; font-size:14px; color:#dce3f5; margin:13px 0 7px; }
+  input, select, textarea { width:100%; border-radius:9px; border:1px solid #3b4767; padding:12px; color:var(--text); background:#0c1221; font:inherit; }
+  input:focus, select:focus, textarea:focus { outline:2px solid #ffb30066; border-color:var(--accent); }
+  .payment-box { border:1px dashed #596681; border-radius:12px; padding:15px; color:var(--muted); line-height:1.6; margin-top:16px; }
+  .small { color:var(--muted); font-size:12px; line-height:1.5; }
+  footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">YX <span>DIAMONDS</span></div>
+  <p>Free Fire Diamond Store</p>
+</header>
+<main>
+  <div class="notice"><strong>Important:</strong> This is a demo order page. Payment and diamond delivery are not automatic. Verify every payment manually before fulfilling an order. Never ask customers for passwords or OTPs.</div>
+
+  <h2>Choose Your Plan</h2>
+  <section class="plans" aria-label="Diamond plans">
+    <article class="plan"><div class="diamond">💎 3,500</div><div class="bonus">Diamond package</div><div class="price">₹199</div><button type="button" onclick="choosePlan('3500 Diamonds',199)">Select Plan</button></article>
+    <article class="plan"><div class="diamond">💎 9,000</div><div class="bonus">Diamond package</div><div class="price">₹499</div><button type="button" onclick="choosePlan('9000 Diamonds',499)">Select Plan</button></article>
+    <article class="plan"><div class="diamond">💎 20,000</div><div class="bonus">Diamond package</div><div class="price">₹999</div><button type="button" onclick="choosePlan('20000 Diamonds',999)">Select Plan</button></article>
+    <article class="plan"><div class="diamond">💎 45,000</div><div class="bonus">Diamond package</div><div class="price">₹1,999</div><button type="button" onclick="choosePlan('45000 Diamonds',1999)">Select Plan</button></article>
+  </section>
+
+  <h2>Place Your Order</h2>
+  <form id="orderForm">
+    <label for="uid">Free Fire Player UID</label>
+    <input id="uid" name="uid" inputmode="numeric" pattern="[0-9]{5,20}" minlength="5" maxlength="20" placeholder="Enter your Player UID" required>
+
+    <label for="nickname">In-game nickname (optional)</label>
+    <input id="nickname" name="nickname" maxlength="40" placeholder="Enter nickname">
+
+    <label for="plan">Selected plan</label>
+    <select id="plan" name="plan" required>
+      <option value="">Choose a diamond plan</option>
+      <option value="3500 Diamonds — ₹199" data-price="199">3,500 Diamonds — ₹199</option>
+      <option value="9000 Diamonds — ₹499" data-price="499">9,000 Diamonds — ₹499</option>
+      <option value="20000 Diamonds — ₹999" data-price="999">20,000 Diamonds — ₹999</option>
+      <option value="45000 Diamonds — ₹1,999" data-price="1999">45,000 Diamonds — ₹1,999</option>
+    </select>
+
+    <div class="payment-box">
+      <strong>Payment instructions</strong><br>
+      Add your verified UPI ID or payment QR here before publishing this site. Confirm the recipient name and amount before paying.
+      <div class="small">Do not enter a fake payment ID or pay an unverified account. This demo does not process payments.</div>
+    </div>
+
+    <label for="txn">Transaction ID / UTR</label>
+    <input id="txn" name="txn" maxlength="100" placeholder="Enter transaction reference after payment" required>
+
+    <label for="contact">Contact number (optional)</label>
+    <input id="contact" name="contact" inputmode="tel" maxlength="20" placeholder="For order updates">
+
+    <button class="submit" type="submit">Review Order</button>
+    <p class="small">This page only prepares an order summary in your browser. It does not send orders to the owner or verify payments until you connect a secure backend or order form.</p>
+  </form>
+  <div id="result" class="payment-box" hidden aria-live="polite"></div>
+</main>
+<footer>YX Diamonds · Demo storefront · Please confirm UID and payment details before fulfilling any order.</footer>
+<script>
+function choosePlan(name, price) {
+  const select = document.getElementById('plan');
+  for (const option of select.options) {
+    if (option.text.includes(name.replace(' Diamonds','')) && option.dataset.price === String(price)) {
+      select.value = option.value;
+      break;
+    }
+  }
+  document.getElementById('plan').scrollIntoView({behavior:'smooth',block:'center'});
+}
+document.getElementById('orderForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const uid = document.getElementById('uid').value.trim();
+  const plan = document.getElementById('plan').value;
+  const txn = document.getElementById('txn').value.trim();
+  const result = document.getElementById('result');
+  result.hidden = false;
+  result.innerHTML = '<strong>Order summary (not submitted)</strong><br>UID: ' + escapeHtml(uid) +
+    '<br>Plan: ' + escapeHtml(plan) +
+    '<br>Transaction reference: ' + escapeHtml(txn) +
+    '<br><br><span class="small">This summary is only on this device. To receive orders, connect a backend or a trusted form service.</span>';
+  result.scrollIntoView({behavior:'smooth',block:'center'});
+});
+function escapeHtml(value) {
+  return value.replace(/[&<>"']/g, function(char) {
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char];
+  });
+}
+</script>
+</body>
+</html>
